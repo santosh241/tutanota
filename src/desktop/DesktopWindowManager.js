@@ -33,11 +33,11 @@ export class WindowManager {
 		this._tray = tray
 		this._notifier = notifier
 		this.dl = dl
-		this._contextMenu = new DesktopContextMenu()
 	}
 
 	setIPC(ipc: IPC) {
 		this.ipc = ipc
+		this._contextMenu = new DesktopContextMenu(ipc)
 	}
 
 	newWindow(showWhenReady: boolean, noAutoLogin?: boolean): ApplicationWindow {
@@ -57,7 +57,7 @@ export class WindowManager {
 			windows.push(w)
 			this._tray.clearBadge()
 			this._notifier.resolveGroupedNotification(w.getUserId())
-		}).on('did-start-navigation', ()=>{
+		}).on('did-start-navigation', () => {
 			this._tray.clearBadge()
 		}).on('page-title-updated', ev => {
 			if (w.getTitle() === LOGIN_TITLE) {

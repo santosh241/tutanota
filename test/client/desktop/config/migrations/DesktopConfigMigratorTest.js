@@ -20,8 +20,9 @@ o.spec('desktop config migrator test', function () {
 			"defaultDownloadPath": null,
 			"enableAutoUpdate": true,
 			"runAsTrayApp": true,
-			"desktopConfigVersion": 1,
+			"desktopConfigVersion": 2,
 			"showAutoUpdateOption": true,
+			"spellcheck": true,
 		}
 
 		o(migrator("migrateClient", oldConfig, oldConfig)).deepEquals(requiredResult)
@@ -34,8 +35,9 @@ o.spec('desktop config migrator test', function () {
 		}
 		const requiredResult = {
 			"runAsTrayApp": true,
-			"desktopConfigVersion": 1,
+			"desktopConfigVersion": 2,
 			"showAutoUpdateOption": true,
+			"spellcheck": false,
 		}
 
 		o(migrator("migrateAdmin", oldConfig, oldConfig)).deepEquals(requiredResult)

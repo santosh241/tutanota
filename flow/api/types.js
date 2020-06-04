@@ -213,6 +213,7 @@ type JsRequestType = 'createMailEditor'
 	| 'invalidateAlarms'
 	| 'applySearchResultToOverlay'
 	| 'addShortcuts'
+	| 'showSpellcheckDropdown'
 
 type WebContentsMessage
 	= 'initialize-ipc'

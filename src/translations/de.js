@@ -1128,6 +1128,11 @@ module.exports = {
 		"describeProblem_msg": "Bitte gib deine Frage ein",
 		"noSolution_msg": "Du hast keine Lösung zu deinem Problem gefunden?",
 		"contactSupport_action": "Support kontaktieren",
+		"spelling_label": "Rechtschreibung",
+		"addToDict_action": '"{word}" zum Wörterbuch hinzufügen',
+		"changeSpellCheckLang_action": 'Sprache wechseln…',
+		"checkSpelling_action": "Rechtschreibung prüfen",
+		"requiresNewWindow_msg": "Änderung wird in neuen Fenstern aktiv.",
 		"creditCardDeclined_msg": "Leider wurde deine Kreditkarte abgelehnt. Bitte kontaktiere deine Bank um dies zu beheben oder wähle eine andere Zahlungsmethode.",
 	}
 }

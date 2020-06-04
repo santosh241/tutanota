@@ -22,7 +22,10 @@ export class DesktopDownloadManager {
 		this._fileManagersOpen = 0
 	}
 
-	manageDownloadsForSession(session: ElectronSession) {
+	manageDownloadsForSession(session: ElectronSession, dictUrl: string) {
+		dictUrl = dictUrl + '/dictionaries/'
+		console.log('getting dictionaries from:', dictUrl)
+		session.setSpellCheckerDictionaryDownloadURL(dictUrl)
 		session.removeAllListeners('will-download').on('will-download', (ev, item) => this._handleDownloadItem(ev, item))
 	}
 

@@ -63,6 +63,7 @@
 		"systemjs-hot-reloader": "git+https://github.com/mpfau/systemjs-hot-reloader.git#temp",
 		"systemjs-plugin-babel": "0.0.25",
 		"winreg": "1.2.4",
-		"xhr2": "0.2.0"
+		"xhr2": "0.2.0",
+		"jszip": "3.5.0"
 	}
 }

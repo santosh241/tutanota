@@ -68,6 +68,7 @@ o.spec("DesktopDownloadManagerTest", () => {
 			this.callbacks = {}
 			return this
 		},
+		setSpellCheckerDictionaryDownloadURL: () => {},
 		on: function (ev, cb) {
 			this.callbacks[ev] = cb
 			return this
@@ -194,7 +195,7 @@ o.spec("DesktopDownloadManagerTest", () => {
 		const {DesktopDownloadManager} = n.subject('../../src/desktop/DesktopDownloadManager.js')
 		const dl = new DesktopDownloadManager(confMock, netMock)
 		const sessionMock = n.mock("__session", session).set()
-		dl.manageDownloadsForSession(sessionMock)
+		dl.manageDownloadsForSession(sessionMock, "dictUrl")
 		o(sessionMock.removeAllListeners.callCount).equals(1)
 		o(sessionMock.removeAllListeners.args[0]).equals("will-download")
 		o(sessionMock.on.callCount).equals(1)
@@ -211,7 +212,7 @@ o.spec("DesktopDownloadManagerTest", () => {
 		const dl = new DesktopDownloadManager(confMock, netMock)
 		const sessionMock = n.mock("__session", session).set()
 		const itemMock = n.mock("__item", item).set()
-		dl.manageDownloadsForSession(sessionMock)
+		dl.manageDownloadsForSession(sessionMock, "dictUrl")
 		sessionMock.callbacks["will-download"]({}, itemMock)
 		o(desktopUtilsMock.nonClobberingFilename.callCount).equals(1)
 		o(itemMock.savePath).equals("/a/download/path/nonClobbering")
@@ -232,7 +233,7 @@ o.spec("DesktopDownloadManagerTest", () => {
 		const {DesktopDownloadManager} = n.subject('../../src/desktop/DesktopDownloadManager.js')
 		const dl = new DesktopDownloadManager(confMock, netMock)
 		const sessionMock = n.mock("__session", session).set()
-		dl.manageDownloadsForSession(sessionMock)
+		dl.manageDownloadsForSession(sessionMock, "dictUrl")
 		o(sessionMock.removeAllListeners.callCount).equals(1)
 		o(sessionMock.removeAllListeners.args[0]).equals("will-download")
 		o(sessionMock.on.callCount).equals(1)
@@ -248,7 +249,7 @@ o.spec("DesktopDownloadManagerTest", () => {
 		const dl = new DesktopDownloadManager(confMock, netMock)
 		const sessionMock = n.mock("__session", session).set()
 		const itemMock = n.mock("__item", item).set()
-		dl.manageDownloadsForSession(sessionMock)
+		dl.manageDownloadsForSession(sessionMock, "dictUrl")
 
 		sessionMock.callbacks["will-download"]({}, itemMock)
 		o(desktopUtilsMock.nonClobberingFilename.callCount).equals(1)
@@ -280,7 +281,7 @@ o.spec("DesktopDownloadManagerTest", () => {
 		const sessionMock = n.mock("__session", session).set()
 		const itemMock = n.mock("__item", item).set()
 		const itemMock2 = n.mock("__item", item).set()
-		dl.manageDownloadsForSession(sessionMock)
+		dl.manageDownloadsForSession(sessionMock, "dictUrl")
 		sessionMock.callbacks["will-download"]({}, itemMock)
 		sessionMock.callbacks["will-download"]({}, itemMock2)
 		itemMock.callbacks["done"]({}, 'completed')
@@ -299,7 +300,7 @@ o.spec("DesktopDownloadManagerTest", () => {
 		const dl = new DesktopDownloadManager(confMock, netMock)
 		const sessionMock = n.mock("__session", session).set()
 		const itemMock = n.mock("__item", item).set()
-		dl.manageDownloadsForSession(sessionMock)
+		dl.manageDownloadsForSession(sessionMock, "dictUrl")
 		sessionMock.callbacks["will-download"]({}, itemMock)
 		o(desktopUtilsMock.nonClobberingFilename.callCount).equals(1)
 		o(itemMock.savePath).equals("/a/download/path/nonClobbering")

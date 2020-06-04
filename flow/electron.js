@@ -50,6 +50,8 @@ declare module 'electron' {
 
 	declare export type ContextMenuParams = {
 		linkURL: string,
+		misspelledWord: string,
+		dictionarySuggestions: Array<string>,
 		editFlags: {
 			canCut: boolean,
 			canPaste: boolean,
@@ -430,6 +432,7 @@ declare module 'electron' {
 		id: number;
 
 		static fromId(number): BrowserWindow;
+		static fromWebContents(WebContents): BrowserWindow;
 	}
 
 	declare export class Tray {
@@ -500,6 +503,10 @@ declare module 'electron' {
 		setPermissionRequestHandler: (PermissionRequestHandler | null) => void;
 		on: (event: ElectronSessionEvent, (ev: Event, item: DownloadItem, webContents: WebContents) => void) => void;
 		removeAllListeners: (event: ElectronSessionEvent) => ElectronSession;
+		setSpellCheckerDictionaryDownloadURL: (string) => void;
+		setSpellCheckerLanguages: (Array<string>) => void;
+		getSpellCheckerLanguages: () => Array<string>;
+		availableSpellCheckerLanguages: Array<string>;
 	}
 
 	declare export type DownloadItem = {

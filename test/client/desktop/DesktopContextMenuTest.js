@@ -34,21 +34,25 @@ o.spec("DesktopContextMenu Test", () => {
 		})
 	}
 
+	const ipc = {}
+
 	const standardMocks = () => {
 		// node modules
 		const electronMock = n.mock('electron', electron).set()
 		const langMock = n.mock("../misc/LanguageViewModel", lang).set()
+		const ipcMock = n.mock('__ipc', ipc).set()
 
 		return {
 			electronMock,
 			langMock,
+			ipcMock,
 		}
 	}
 
 	o("can handle undefined browserWindow and webContents in callback", () => {
-		const {electronMock} = standardMocks()
+		const {electronMock, ipcMock} = standardMocks()
 		const {DesktopContextMenu} = n.subject("../../src/desktop/DesktopContextMenu.js")
-		const contextMenu = new DesktopContextMenu()
+		const contextMenu = new DesktopContextMenu(ipcMock)
 		contextMenu.open({
 			linkURL: "nourl",
 			editFlags: {
@@ -57,7 +61,9 @@ o.spec("DesktopContextMenu Test", () => {
 				canCopy: false,
 				canUndo: false,
 				canRedo: false
-			}
+			},
+			dictionarySuggestions: [],
+			misspelledWord: ""
 		})
 		electronMock.MenuItem.mockedInstances.forEach(i => i.click && i.click(undefined, undefined))
 		electronMock.MenuItem.mockedInstances.forEach(i => i.click && i.click(undefined, "nowebcontents"))

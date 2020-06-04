@@ -6,9 +6,9 @@ const path = require("path")
 function build(opts) {
 	let {
 		dirname, // directory this was called from
-		version, // application version that gets built
+		version, // application version number that gets built
 		targets, // which desktop targets to build and how to package them
-		updateUrl, // where the client should pull its updates from, if any
+		updateUrl, // where the client should pull its updates and dictionaries from, if any
 		nameSuffix, // suffix used to distinguish test-, prod- or snapshot builds on the same machine
 		notarize, // for the MacOs notarization feature
 		outDir, // where to copy the finished artifacts
@@ -33,8 +33,8 @@ function build(opts) {
 		updateUrl: updateUrl,
 		iconPath: path.join(dirname, "/resources/desktop-icons/logo-solo-red.png"),
 		sign: nameSuffix !== '-snapshot' && updateUrl !== "",
-		nameSuffix: nameSuffix,
 		notarize: notarize,
+		nameSuffix,
 		unpacked: unpacked
 	})
 	let writeConfig = fs.writeFileAsync("./build/dist/package.json", JSON.stringify(content), 'utf-8')

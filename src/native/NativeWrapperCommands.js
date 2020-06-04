@@ -99,6 +99,37 @@ const addShortcuts = (msg: any) => {
 	})
 }
 
+const showSpellcheckDropdown = (msg: any) => {
+	const [current, options] = msg.args
+	return Promise.join(
+		_asyncImport('src/gui/base/Dialog.js'),
+		_asyncImport('src/misc/LanguageViewModel.js'),
+		_asyncImport('libs/stream.js'),
+		({Dialog}, {languages, lang}, stream) => {
+			const items = options.map(option => {
+				const language = languages.find(l => l.code === option.replace('-', '_').toLowerCase())
+					|| languages.find(l => l.code === option.slice(0, 2).toLowerCase())
+				const variant = option.length > 3
+					? ` (${option.slice(3)})`
+					: ""
+				const name = language
+					? lang.get(language.textId) + variant
+					: option
+				// some languages that can be spellchecked don't have a
+				// textId in the translations.
+				return {name, value: option}
+			})
+
+			return Dialog.showDropDownSelectionDialog(
+				"spelling_label",
+				"language_label",
+				null,
+				items,
+				stream(current)
+			)
+		})
+}
+
 function getFilesData(filesUris: string[]): Promise<Array<FileReference>> {
 	return Promise.all(filesUris.map(uri =>
 		Promise.join(getName(uri), getMimeType(uri), getSize(uri), (name, mimeType, size) => {
@@ -173,5 +204,6 @@ export const desktopCommands = {
 	openFindInPage,
 	applySearchResultToOverlay,
 	reportError,
-	addShortcuts
+	addShortcuts,
+	showSpellcheckDropdown,
 }

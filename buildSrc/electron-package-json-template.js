@@ -50,6 +50,7 @@ module.exports = function (opts) {
 			"initialSseConnectTimeoutInSeconds": 60,
 			"maxSseConnectTimeoutInSeconds": 2400,
 			"configMigrationFunction": "migrateClient",
+			updateUrl,
 			"defaultDesktopConfig": {
 				/**
 				 * do not change defaultDesktopConfig
