@@ -8,6 +8,7 @@ export function sanitizeFilename(filename: string): string {
 	// unicode control codes
 	const controlRe = /[\x00-\x1f\x80-\x9f]/g
 	// trailing period in windows file names
+	// this is valid in linux but can't be checked from the browser
 	const windowsTrailingRe = /[\. ]+$/
 
 	return filename
